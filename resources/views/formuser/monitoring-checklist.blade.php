@@ -31,12 +31,43 @@
                                 {{ csrf_field() }}
 
                                 <div class="card-body">
-
-                                    @foreach ($checklists as $checklist)
-                                        {{ $checklist->keterangan }}<br>
-                                    @endforeach
-
-
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Checklist</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($checklists as $key => $checklist)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $checklist->keterangan }}</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="status[{{ $checklist->id }}]"
+                                                                id="status{{ $checklist->id }}Ok" value="Ok">
+                                                            <label class="form-check-label"
+                                                                for="status{{ $checklist->id }}Ok">
+                                                                Ok
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="status[{{ $checklist->id }}]"
+                                                                id="status{{ $checklist->id }}NotOk" value="Not Ok">
+                                                            <label class="form-check-label"
+                                                                for="status{{ $checklist->id }}NotOk">
+                                                                Not Ok
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
 
                                 <div class="card-footer">

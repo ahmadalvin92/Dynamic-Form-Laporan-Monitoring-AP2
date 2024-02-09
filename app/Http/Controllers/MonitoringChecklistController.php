@@ -23,16 +23,17 @@ class MonitoringChecklistController extends Controller
             // Define your validation rules here
         ]);
 
-        // Process the request data and add the monitoring checklist
-        // For demonstration purposes, let's assume we're creating a new monitoring checklist record
-        $monitoringChecklist = new MonitoringChecklist();
-        $monitoringChecklist->id = $request->input('id');
-        $monitoringChecklist->idmonitoring = $request->input('idmonitoring');
-        $monitoringChecklist->checklist = $request->input('checklist');
-        $monitoringChecklist->status = $request->input('status');
-        $monitoringChecklist->save();
+        // Process the request data and add the monitoring checklists
+        foreach ($request->input('status') as $checklistId => $status) {
+            $monitoringChecklist = new MonitoringChecklist();
+            $monitoringChecklist->idmonitoring = $request->input('idmonitoring');
+            $monitoringChecklist->checklist = $checklistId; // Assuming checklist_id is the foreign key to the Masterchecklist table
+            $monitoringChecklist->status = $status;
+            $monitoringChecklist->save();
+        }
 
         // Optionally, you can return a response or redirect the user to another page
-        return redirect()->back()->with('success', 'Monitoring checklist added successfully.');
+        return redirect()->back()->with('success', 'Monitoring checklists added successfully.');
     }
+
 }
