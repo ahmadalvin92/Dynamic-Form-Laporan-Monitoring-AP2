@@ -1,5 +1,6 @@
 table {
     width: 100%;
+    height: 100%;
 }
 
 table,
@@ -8,15 +9,71 @@ th {
     border-collapse: collapse;
 }
 
-th,
+th {
+    padding: 5px;
+}
+
 td {
     padding: 5px;
 }
 
 img {
-    width: 100px;
+    width: 125px;
 }
 
 .tindakan {
     vertical-align: top;
+    padding-left: 50px;
+}
+
+.deskripsi {
+    padding-left: 50px;
+}
+
+.bottom-boxes {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.box1 {
+    display: inline-block;
+    margin-top: 50px;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    width: 20%;
+    /* Add any additional styling as needed */
+}
+
+.box2 {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px solid #000;
+    width: 30%;
+    /* Add any additional styling as needed */
+}
+
+.box3 {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: -9.5px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000;
+    width: 20%;
+    height: 50px;
+    /* Add any additional styling as needed */
+}
+
+.box4 {
+    display: inline-block;
+    margin-top: -9.5px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000;
+    width: 30%;
+    height: 50px;
+    /* Add any additional styling as needed */
 }

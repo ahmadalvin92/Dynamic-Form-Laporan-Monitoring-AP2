@@ -43,5 +43,17 @@ class LaporanMonitoring extends Model
 
     }
 
+    static function datalaporanmonitoring()
+    {
+        $datalaporanmonitoring = LaporanMonitoring::orderBy('id', 'DESC')->get();
+        return $datalaporanmonitoring;
+    }
+
+    static function detaillaporanmonitoring($id)
+    {
+        $datadetail = LaporanMonitoring::where('id', $id)->first();
+        return $datadetail;
+    }
+
 }
 

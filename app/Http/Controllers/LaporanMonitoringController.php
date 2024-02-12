@@ -45,4 +45,16 @@ class LaporanMonitoringController extends Controller
         return redirect('/form-monitoring-perangkat/' . $perangkat)->with("pesanlaporanmonitoring", $pesanlaporanmonitoring);
         // Redirect ke halaman tertentu jika diperlukan
     }
+    public function laporanmonitoringdata()
+    {
+        $datalaporanmonitoring = LaporanMonitoring::datalaporanmonitoring();
+        return view('/laporanmonitoring')->with('datalaporanmonitoring', $datalaporanmonitoring);
+    }
+
+    public function laporanmonitoring_createpdf($id)
+    {
+        $datadetail = LaporanMonitoring::detaillaporanmonitoring($id);
+        return view('/laporanmonitoring-createpdf')->with('datadetail', $datadetail);
+    }
+
 }

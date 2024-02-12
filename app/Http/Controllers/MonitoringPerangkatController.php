@@ -43,7 +43,7 @@ class MonitoringPerangkatController extends Controller
         MonitoringPerangkat::addmonitoringperangkat($idperangkat, $idlaporanmonitoring, $lokasi, $catatan, $fotoname);
 
         $pesanmonitoringperangkat = "Data telah ditambahkan !";
-        return redirect('/form-monitoring-checklist/' . $idperangkat)->with
+        return redirect('/form-monitoring-checklist/' . $idperangkat . '/' . $idlaporanmonitoring)->with
         ("pesamonitoringperangkat", $pesanmonitoringperangkat);
 
     }

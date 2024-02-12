@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LaporanMonitoring;
 use App\Models\Masterperangkat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KaryawanController;
@@ -53,6 +54,10 @@ Route::post('/add-laporan-monitoring', [LaporanMonitoringController::class, 'add
 Route::get('/form-monitoring-perangkat/{perangkat}', [MonitoringPerangkatController::class, 'index']);
 Route::post('/add-monitoring-perangkat', [MonitoringPerangkatController::class, 'addMonitoringPerangkat']);
 
-Route::get('/form-monitoring-checklist/{perangkat}', [MonitoringChecklistController::class, 'index']);
+Route::get('/form-monitoring-checklist/{perangkat}/{idlaporanmonitoring}', [MonitoringChecklistController::class, 'index']);
 Route::post('/add-monitoring-checklist', [MonitoringChecklistController::class, 'addMonitoringChecklist']);
+
+Route::get('/laporanmonitoringdata', [LaporanMonitoringController::class, 'laporanmonitoringdata']);
+Route::get('/laporanmonitoring-createpdf/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_createpdf']);
+
 

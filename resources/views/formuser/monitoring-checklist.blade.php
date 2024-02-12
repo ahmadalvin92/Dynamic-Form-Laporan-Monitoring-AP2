@@ -45,6 +45,10 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $checklist->keterangan }}</td>
                                                     <td>
+                                                        <input type="hidden" name="idlaporanmonitoring"
+                                                            value="{{ $idlaporanmonitoring }}">
+                                                        <input type="hidden" name="idmonitoringperangkat"
+                                                            value="{{ $id_monitoring_perangkat }}">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="status[{{ $checklist->id }}]"
