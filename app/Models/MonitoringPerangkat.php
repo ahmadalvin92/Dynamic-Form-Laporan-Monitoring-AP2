@@ -27,6 +27,11 @@ class MonitoringPerangkat extends Model
         ];
         MonitoringPerangkat::create($field);
     }
+
+    public function masterperangkat()
+    {
+        return $this->belongsTo(Masterperangkat::class, 'idperangkat', 'id');
+    }
     public function laporanMonitoring()
     {
         return $this->belongsTo(LaporanMonitoring::class, 'idlaporanmonitoring');

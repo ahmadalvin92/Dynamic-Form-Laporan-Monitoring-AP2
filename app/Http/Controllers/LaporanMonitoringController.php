@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LaporanMonitoring;
 use App\Models\Masterperangkat;
+use App\Models\Monitoringperangkat;
+use App\Models\MonitoringChecklist;
 
 class LaporanMonitoringController extends Controller
 {
@@ -54,7 +56,11 @@ class LaporanMonitoringController extends Controller
     public function laporanmonitoring_createpdf($id)
     {
         $datadetail = LaporanMonitoring::detaillaporanmonitoring($id);
-        return view('/laporanmonitoring-createpdf')->with('datadetail', $datadetail);
+        //$dataperangkat = Monitoringperangkat::detailperangkatmonitoring($id);
+        $dataperangkat = MonitoringPerangkat::with('masterperangkat')->where('idlaporanmonitoring', $id)->first();
+        $datachecklist = MonitoringChecklist::with('masterchecklist')->where('idmonitoring', $id)->get();
+        return view('/laporanmonitoring-createpdf')->with('datadetail', $datadetail)
+            ->with('dataperangkat', $dataperangkat)->with('datachecklist', $datachecklist);
     }
 
 }

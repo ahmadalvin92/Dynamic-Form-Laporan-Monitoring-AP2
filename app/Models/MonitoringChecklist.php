@@ -16,7 +16,16 @@ class MonitoringChecklist extends Model
         'checklist',
         'status',
     ];
+
+    public function masterchecklist()
+    {
+        return $this->belongsTo(Masterchecklist::class, 'checklist');
+    }
     
+    static function detailchecklistmonitoring($id){
+        $datachecklist = MonitoringChecklist::where('idmonitoring', $id)->get();
+        return $datachecklist;
+    }
 
     public function monitoringPerangkat()
     {
