@@ -12,7 +12,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <div class="float-right">
-                            <a href="#" class="btn btn-primary" onclick="alert('Tambah Perangkat')">Tambah
+                            <a href="/form-laporan-monitoring" class="btn btn-primary" onclick="alert('Tambah Perangkat')">Tambah
                                 Perangkat</a>
                         </div>
                     </div><!-- /.row -->
@@ -53,7 +53,7 @@
                                         <td>{{ $data->user }}</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm">Delete</button>
-                                            <button class="btn btn-primary btn-sm">Edit</button>
+                                            <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
                                             <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
                                                 pdf</button>
                                         </td>

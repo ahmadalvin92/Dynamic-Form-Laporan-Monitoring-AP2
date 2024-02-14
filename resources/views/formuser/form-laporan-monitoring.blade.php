@@ -106,7 +106,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="ttd1">TTD1</label>
+                                                <label for="ttd1">Angkasa Pura II</label>
                                                 <div>
                                                     <!-- Signature Pad for TTD1 -->
                                                     <canvas id="ttd1Canvas" style="border: 1px solid #000;"></canvas>
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="ttd2">TTD2</label>
+                                                <label for="ttd2">Angkasa Pura Solusi</label>
                                                 <div>
                                                     <!-- Signature Pad for TTD2 -->
                                                     <canvas id="ttd2Canvas" style="border: 1px solid #000;"></canvas>

@@ -53,6 +53,18 @@ class LaporanMonitoringController extends Controller
         return view('/laporanmonitoring')->with('datalaporanmonitoring', $datalaporanmonitoring);
     }
 
+    public function laporanmonitoring_show($id)
+    {
+        $datadetail = LaporanMonitoring::detaillaporanmonitoring($id);
+        $datalaporanmonitoring = LaporanMonitoring::datalaporanmonitoring();
+        //$dataperangkat = Monitoringperangkat::detailperangkatmonitoring($id);
+        $dataperangkat = MonitoringPerangkat::with('masterperangkat')->where('idlaporanmonitoring', $id)->first();
+        $datachecklist = MonitoringChecklist::with('masterchecklist')->where('idmonitoring', $id)->get();
+        return view('/laporanmonitoring-show')->with('datadetail', $datadetail)
+            ->with('dataperangkat', $dataperangkat)->with('datachecklist', $datachecklist)->with('datalaporanmonitoring', $datalaporanmonitoring);
+        ;
+    }
+
     public function laporanmonitoring_createpdf($id)
     {
         $datadetail = LaporanMonitoring::detaillaporanmonitoring($id);

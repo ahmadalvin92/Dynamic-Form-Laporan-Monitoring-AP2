@@ -58,6 +58,7 @@ Route::get('/form-monitoring-checklist/{perangkat}/{idlaporanmonitoring}', [Moni
 Route::post('/add-monitoring-checklist', [MonitoringChecklistController::class, 'addMonitoringChecklist']);
 
 Route::get('/laporanmonitoringdata', [LaporanMonitoringController::class, 'laporanmonitoringdata']);
+Route::get('/laporanmonitoring-show/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_show']);
 Route::get('/laporanmonitoring-createpdf/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_createpdf']);
 
 
