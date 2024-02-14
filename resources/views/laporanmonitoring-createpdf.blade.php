@@ -70,13 +70,13 @@
                         
                             <tr>
                                 <td>
-                                    <hr>catatan:
+                                    <hr>Catatan : {{ $dataperangkat->catatan }}
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <hr> lampiran
+                                    <hr> Lampiran : <br> <img src="{{ url('file/'.$dataperangkat->foto) }}">
                                 </td>
                                 <td></td>
                             </tr>
