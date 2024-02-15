@@ -12,7 +12,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <div class="float-right">
-                            <a href="/form-laporan-monitoring" class="btn btn-primary" onclick="alert('Tambah Perangkat')">Tambah
+                            <a href="/form-laporan-monitoring" class="btn btn-primary" >Tambah
                                 Perangkat</a>
                         </div>
                     </div><!-- /.row -->
