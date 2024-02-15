@@ -52,7 +52,11 @@
                                         <td>{{ $data->jam }}</td>
                                         <td>{{ $data->user }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this data?')) { document.getElementById('delete-form-{{$data->id}}').submit(); }">Delete</a>
+                                            <form id="delete-form-{{$data->id}}" action="/delete-laporanmonitoring/{{$data->id}}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                             <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
                                             <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
                                                 pdf</button>

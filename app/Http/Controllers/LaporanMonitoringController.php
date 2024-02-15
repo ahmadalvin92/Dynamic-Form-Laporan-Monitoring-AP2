@@ -77,4 +77,14 @@ class LaporanMonitoringController extends Controller
         ;
     }
 
+    public function delete($id)
+    {
+        $data = LaporanMonitoring::find($id);
+        if ($data) {
+            $data->delete();
+        }
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
+    }
+
+
 }
