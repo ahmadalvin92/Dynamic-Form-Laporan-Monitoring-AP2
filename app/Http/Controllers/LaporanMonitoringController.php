@@ -59,9 +59,11 @@ class LaporanMonitoringController extends Controller
         $datalaporanmonitoring = LaporanMonitoring::datalaporanmonitoring();
         //$dataperangkat = Monitoringperangkat::detailperangkatmonitoring($id);
         $dataperangkat = MonitoringPerangkat::with('masterperangkat')->where('idlaporanmonitoring', $id)->first();
+        $datafotoIds = MonitoringPerangkat::where('idlaporanmonitoring', $id)->pluck('id');
+        $datafoto = MonitoringPerangkat::whereIn('id', $datafotoIds)->get();
         $datachecklist = MonitoringChecklist::with('masterchecklist')->where('idmonitoring', $id)->get();
         return view('/laporanmonitoring-show')->with('datadetail', $datadetail)
-            ->with('dataperangkat', $dataperangkat)->with('datachecklist', $datachecklist)->with('datalaporanmonitoring', $datalaporanmonitoring);
+            ->with('dataperangkat', $dataperangkat)->with('datafoto', $datafoto)->with('datachecklist', $datachecklist)->with('datalaporanmonitoring', $datalaporanmonitoring);
         ;
     }
 
@@ -71,9 +73,11 @@ class LaporanMonitoringController extends Controller
         $datalaporanmonitoring = LaporanMonitoring::datalaporanmonitoring();
         //$dataperangkat = Monitoringperangkat::detailperangkatmonitoring($id);
         $dataperangkat = MonitoringPerangkat::with('masterperangkat')->where('idlaporanmonitoring', $id)->first();
+        $datafotoIds = MonitoringPerangkat::where('idlaporanmonitoring', $id)->pluck('id');
+        $datafoto = MonitoringPerangkat::whereIn('id', $datafotoIds)->get();
         $datachecklist = MonitoringChecklist::with('masterchecklist')->where('idmonitoring', $id)->get();
         return view('/laporanmonitoring-createpdf')->with('datadetail', $datadetail)
-            ->with('dataperangkat', $dataperangkat)->with('datachecklist', $datachecklist)->with('datalaporanmonitoring', $datalaporanmonitoring);
+            ->with('dataperangkat', $dataperangkat)->with('datafoto', $datafoto)->with('datachecklist', $datachecklist)->with('datalaporanmonitoring', $datalaporanmonitoring);
         ;
     }
 

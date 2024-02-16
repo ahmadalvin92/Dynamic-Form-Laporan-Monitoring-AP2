@@ -29,22 +29,25 @@ class MonitoringPerangkatController extends Controller
             'idlaporanmonitoring' => 'required',
             'lokasi' => 'required',
             'catatan' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Contoh validasi untuk file gambar
+            'foto.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk setiap file gambar
         ]);
 
         $idperangkat = $request->idperangkat;
         $idlaporanmonitoring = $request->idlaporanmonitoring;
         $lokasi = $request->lokasi;
         $catatan = $request->catatan;
-        $foto = $request->file('foto');
-        $fotoname = str_replace(' ', '', time() . "_" . $foto->getClientOriginalName());
-        $foto->move("file/", $fotoname);
 
-        MonitoringPerangkat::addmonitoringperangkat($idperangkat, $idlaporanmonitoring, $lokasi, $catatan, $fotoname);
+        if ($request->hasFile('foto')) {
+            $fotos = $request->file('foto');
+            foreach ($fotos as $foto) {
+                $fotoname = str_replace(' ', '', time() . "_" . $foto->getClientOriginalName());
+                $foto->move("file/", $fotoname);
+                MonitoringPerangkat::addmonitoringperangkat($idperangkat, $idlaporanmonitoring, $lokasi, $catatan, $fotoname);
+            }
+        }
 
         $pesanmonitoringperangkat = "Data telah ditambahkan !";
-        return redirect('/form-monitoring-checklist/' . $idperangkat . '/' . $idlaporanmonitoring)->with
-        ("pesamonitoringperangkat", $pesanmonitoringperangkat);
-
+        return redirect('/form-monitoring-checklist/' . $idperangkat . '/' . $idlaporanmonitoring)->with("pesamonitoringperangkat", $pesanmonitoringperangkat);
     }
+
 }

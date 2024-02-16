@@ -76,7 +76,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <hr> Lampiran : <br> <img src="{{ url('file/'.$dataperangkat->foto) }}">
+                                    <hr> @if($datafoto->count() > 0)
+                                                <hr> Lampiran : <br>
+                                                @foreach($datafoto as $foto)
+                                                    <img src="{{ url('file/'.$foto->foto) }}"><br>
+                                                @endforeach
+                                            @endif
                                 </td>
                                 <td></td>
                             </tr>

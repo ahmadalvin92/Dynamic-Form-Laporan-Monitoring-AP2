@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->unsignedInteger('idlaporanmonitoring');
             $table->string('lokasi');
             $table->text('catatan')->nullable();
-            $table->string('foto')->nullable();
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }

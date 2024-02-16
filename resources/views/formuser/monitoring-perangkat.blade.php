@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto</label>
-                                        <input type="file" name="foto" class="form-control" id="foto">
+                                        <input type="file" name="foto[]" class="form-control" id="foto" multiple>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

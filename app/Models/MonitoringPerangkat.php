@@ -41,4 +41,6 @@ class MonitoringPerangkat extends Model
     {
         return $this->belongsTo(Perangkat::class, 'idperangkat');
     }
+
+    
 }
