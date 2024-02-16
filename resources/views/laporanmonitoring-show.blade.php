@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td class="deskripsi">Perangkat</td>
-                                <td>: {{ $datadetail->perangkat }}</td>
+                                <td>: {{ $dataperangkat->masterperangkat->namaperangkat }}</td>
                                 <td></td>
                             </tr>
                             <tr>

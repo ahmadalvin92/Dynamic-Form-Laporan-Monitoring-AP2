@@ -1,4 +1,4 @@
-{{-- panggil template dashbaard --}}
+{{-- panggil template dashboard --}}
 @extends('dashboard')
 
 @section('content')
@@ -18,74 +18,56 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the
-                                card's
-                                content.
-                            </p>
-
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the
-                                card's
-                                content.
-                            </p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
-                <!-- /.col-md-6 -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="m-0">Featured</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Featured</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <h5 class="card-title">Perangkat Maintenance</h5>
+                            <canvas id="barChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
-                <!-- /.col-md-6 -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+        </div>
+    </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<!-- Chart data -->
+<script>
+    var ctx1 = document.getElementById('barChart').getContext('2d');
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Sudah Maintenance', 'Belum Maintenance'],
+            datasets: [{
+                label: 'Jumlah Perangkat',
+                data: [70, 30],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 @endsection

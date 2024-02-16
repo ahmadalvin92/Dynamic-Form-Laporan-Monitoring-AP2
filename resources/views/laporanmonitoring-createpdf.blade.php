@@ -93,18 +93,16 @@
                                     <div class="box2">ANGKASA PURA SOLUSI</div>
                                 </td>
                             </tr>
-                            @foreach ($datalaporanmonitoring as $data)
                             <tr>
                                 <td colspan="3" class="bottom-boxes">
                                     <div class="box1">
-                            <img src="{{ $data->ttd1 }}" alt="Tanda Tangan 1" class="signature-image" />
+                            <img src="{{ $datadetail->ttd1 }}" alt="Tanda Tangan 1" class="signature-image" />
                                     </div>
                                     <div class="box4">
-                                        <img src="{{ $data->ttd2 }}" alt="Tanda Tangan 2" class="signature-image" />
+                                        <img src="{{ $datadetail->ttd2 }}" alt="Tanda Tangan 2" class="signature-image" />
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
