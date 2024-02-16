@@ -27,7 +27,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form action="/add-laporan-monitoring" method="POST" enctype="multipart/form-data">
-                                @csrf
+                                {{ csrf_field() }}
 
                                 <div class="card-body">
                                     <!-- Kolom tanggal diisi secara otomatis -->
@@ -85,11 +85,29 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="divisi">Unit</label>
-                                        <input type="text" name="divisi" class="form-control" id="divisi"
-                                            placeholder="Divisi">
-                                    </div>
+                                    @auth
+                                        @if (Auth::user()->role == 1)
+                                            <div class="form-group">
+                                                <label for="divisi">Unit</label>
+                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi">
+                                            </div>
+                                        @elseif (Auth::user()->role == 2 || Auth::user()->role == 3)
+                                            <div class="form-group">
+                                                <label for="divisi">Unit</label>
+                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="IT Non Public" readonly>
+                                            </div>
+                                        @elseif (Auth::user()->role == 4 || Auth::user()->role == 5)
+                                            <div class="form-group">
+                                                <label for="divisi">Unit</label>
+                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="Data Network" readonly>
+                                            </div>
+                                        @elseif (Auth::user()->role == 6 || Auth::user()->role == 7)
+                                            <div class="form-group">
+                                                <label for="divisi">Unit</label>
+                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="IT AUCC/TOC" readonly>
+                                            </div>
+                                        @endif
+                                    @endauth
 
                                     <div class="form-group">
                                         <label for="area">Lokasi</label>
@@ -99,8 +117,8 @@
 
                                     <div class="form-group">
                                         <label for="user">User</label>
-                                        <input type="text" name="user" class="form-control" id="user"
-                                            placeholder="User">
+                                        <input type="text" name="user" class="form-control" id="user" placeholder="User"
+                                            value="{{ auth()->user()->name }}" readonly>
                                     </div>
 
                                 </div>

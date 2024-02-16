@@ -39,31 +39,89 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {{ $i = 0 }}
-                                @foreach ($datalaporanmonitoring as $data)
-                                    <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $data->tanggal }}</td>
-                                        <td>{{ $data->shift }}</td>
-                                        <td>{{ $data->divisi }}</td>
-                                        <td>{{ $data->perangkat }}</td>
-                                        <td>{{ $data->area }}</td>
-                                        <td>{{ $data->jam }}</td>
-                                        <td>{{ $data->user }}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this data?')) { document.getElementById('delete-form-{{$data->id}}').submit(); }">Delete</a>
-                                            <form id="delete-form-{{$data->id}}" action="/delete-laporanmonitoring/{{$data->id}}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-                                            <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
-                                            <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
-                                                pdf</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @auth
+                                @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3)
+                                    <tbody>
+                                        {{ $i = 0 }}
+                                        @foreach ($datalaporanmonitoringnonpublik as $data)
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $data->tanggal }}</td>
+                                                <td>{{ $data->shift }}</td>
+                                                <td>{{ $data->divisi }}</td>
+                                                <td>{{ $data->perangkat }}</td>
+                                                <td>{{ $data->area }}</td>
+                                                <td>{{ $data->jam }}</td>
+                                                <td>{{ $data->user }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this data?')) { document.getElementById('delete-form-{{$data->id}}').submit(); }">Delete</a>
+                                                    <form id="delete-form-{{$data->id}}" action="/delete-laporanmonitoring/{{$data->id}}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
+                                                    <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
+                                                        pdf</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @endif
+                                @if (Auth::user()->role == 1 || Auth::user()->role == 4 || Auth::user()->role == 5)
+                                    <tbody>
+                                        {{ $i = 0 }}
+                                        @foreach ($datalaporanmonitoringdatanetwork as $data)
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $data->tanggal }}</td>
+                                                <td>{{ $data->shift }}</td>
+                                                <td>{{ $data->divisi }}</td>
+                                                <td>{{ $data->perangkat }}</td>
+                                                <td>{{ $data->area }}</td>
+                                                <td>{{ $data->jam }}</td>
+                                                <td>{{ $data->user }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this data?')) { document.getElementById('delete-form-{{$data->id}}').submit(); }">Delete</a>
+                                                    <form id="delete-form-{{$data->id}}" action="/delete-laporanmonitoring/{{$data->id}}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
+                                                    <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
+                                                        pdf</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @endif
+                                @if (Auth::user()->role == 1 || Auth::user()->role == 6 || Auth::user()->role == 7)
+                                    <tbody>
+                                        {{ $i = 0 }}
+                                        @foreach ($datalaporanmonitoringaucc as $data)
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $data->tanggal }}</td>
+                                                <td>{{ $data->shift }}</td>
+                                                <td>{{ $data->divisi }}</td>
+                                                <td>{{ $data->perangkat }}</td>
+                                                <td>{{ $data->area }}</td>
+                                                <td>{{ $data->jam }}</td>
+                                                <td>{{ $data->user }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this data?')) { document.getElementById('delete-form-{{$data->id}}').submit(); }">Delete</a>
+                                                    <form id="delete-form-{{$data->id}}" action="/delete-laporanmonitoring/{{$data->id}}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <a href="/laporanmonitoring-show/{{$data->id}}" class="btn btn-primary btn-sm">Show</button></a>
+                                                    <a href="/laporanmonitoring-createpdf/{{$data->id}}" class="btn btn-success btn-sm">Generate
+                                                        pdf</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @endif
+                            @endauth
                         </table>
                     </div>
                 </div>

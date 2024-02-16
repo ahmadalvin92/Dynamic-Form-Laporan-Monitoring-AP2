@@ -61,43 +61,117 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="/" class="nav-link">
+                            <a href="/home" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Home
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-desktop"></i>
-                                <p>
-                                    Perangkat
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                        @auth
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3)
                                 <li class="nav-item">
-                                    <a href="/laporanmonitoringdata" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Data Perangkat</p>
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-desktop"></i>
+                                        <p>
+                                            IT Non Public Service
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Data Perangkat</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/form-laporan-monitoring" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Form Perangkat</p>
+                                            </a>
+                                        </li>
+                                        @if (Auth::user()->role == 1 || Auth::user()->role == 2)
+                                        <li class="nav-item">
+                                            <a href="/masterperangkat" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Master Data Perangkat</p>
+                                            </a>
+                                        @endif
+                                    </ul>
                                 </li>
+                            @endif
+                        @endauth
+                        @auth
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 4 || Auth::user()->role == 5)
                                 <li class="nav-item">
-                                    <a href="/form-laporan-monitoring" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Form Perangkat</p>
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-desktop"></i>
+                                        <p>
+                                            Data Network
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Data Perangkat</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/form-laporan-monitoring" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Form Perangkat</p>
+                                            </a>
+                                        </li>
+                                        @if (Auth::user()->role == 1 || Auth::user()->role == 4)
+                                        <li class="nav-item">
+                                            <a href="/masterperangkat" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Master Data Perangkat</p>
+                                            </a>
+                                        @endif
+                                    </ul>
                                 </li>
+                            @endif
+                        @endauth
+                        @auth
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 6 || Auth::user()->role == 7)
                                 <li class="nav-item">
-                                    <a href="/masterperangkat" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Master Data Perangkat</p>
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-desktop"></i>
+                                        <p>
+                                            IT AUCC/TOC
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
-                            </ul>
-                        </li>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Data Perangkat</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/form-laporan-monitoring" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Form Perangkat</p>
+                                            </a>
+                                        </li>
+                                        @if (Auth::user()->role == 1 || Auth::user()->role == 6)
+                                        <li class="nav-item">
+                                            <a href="/masterperangkat" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Master Data Perangkat</p>
+                                            </a>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                        @endauth
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/usermanagement" class="nav-link">
                                 <!-- Replace "fas fa-th" with the desired icon class -->
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>

@@ -31,6 +31,8 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/login', [AuthController::class, 'authenticate']);
 
+Route::get('/usermanagement', [AuthController::class, 'usermanagement']);
+Route::put('/users/{id}/role', [AuthController::class, 'updateRole']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

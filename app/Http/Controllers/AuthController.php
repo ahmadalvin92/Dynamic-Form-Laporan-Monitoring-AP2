@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
+
     public function login(){
         return view('auth/login');
     }
@@ -93,5 +93,51 @@ class AuthController extends Controller
         request()->session()->regenerateToken();
 
         return redirect()->route('login')->with('success, Logged out successfulyy!');
+    }
+
+    public function usermanagement() {
+        $users = User::where('role', '!=', 1)->get();
+        return view('user-management')->with('users', $users);
+    }
+
+    public function updateRole(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $role = $request->input('role');
+        $newRole = null;
+
+        switch ($role) {
+            case 'admin_it_non_public':
+                $newRole = 2;
+                break;
+            case 'user_it_non_public':
+                $newRole = 3;
+                break;
+            case 'admin_data_network':
+                $newRole = 4;
+                break;
+            case 'user_data_network':
+                $newRole = 5;
+                break;
+            case 'admin_it_aocc':
+                $newRole = 6;
+                break;
+            case 'user_it_aocc':
+                $newRole = 7;
+                break;
+            default:
+                // Handle default case or error
+                break;
+        }
+
+        if ($newRole !== null) {
+            $user->role = $newRole;
+            $user->save();
+
+            return response()->json(['message' => 'Role updated successfully'], 200);
+        }
+
+        return response()->json(['message' => 'Invalid role'], 400);
     }
 }
