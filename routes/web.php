@@ -9,6 +9,7 @@ use App\Http\Controllers\MasterperangkatController;
 use App\Http\Controllers\LaporanMonitoringController;
 use App\Http\Controllers\MonitoringPerangkatController;
 use App\Http\Controllers\MonitoringChecklistController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PDFController;
 
 /*
@@ -25,12 +26,18 @@ use App\Http\Controllers\PDFController;
 //Route::get('/', function () {
 //  return view('welcome');
 //});
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/login', [AuthController::class, 'authenticate']);
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::get('/starter', [KaryawanController::class, 'starter']);
 Route::get('/about', [KaryawanController::class, 'about']);
 Route::get('/contact', [KaryawanController::class, 'contact']);
 
-Route::get('/', [KaryawanController::class, 'index']);
+Route::get('/home', [KaryawanController::class, 'index'])->name('home');
 Route::get('/datakaryawan', [KaryawanController::class, 'datakaryawan']);
 Route::get('/formkaryawan', [KaryawanController::class, 'formkaryawan']);
 Route::get('/formkaryawan', [PerangkatController::class, 'formkaryawan']);

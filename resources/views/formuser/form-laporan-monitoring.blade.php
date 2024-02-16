@@ -27,7 +27,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form action="/add-laporan-monitoring" method="POST" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                                @csrf
 
                                 <div class="card-body">
                                     <!-- Kolom tanggal diisi secara otomatis -->
@@ -77,12 +77,16 @@
 
                                     <div class="form-group">
                                         <label for="shift">Shift</label>
-                                        <input type="text" name="shift" class="form-control" id="shift"
-                                            placeholder="Shift">
+                                        <select name="shift" class="form-control" id="shift">
+                                            <option value="Pagi">Pagi</option>
+                                            <option value="Siang">Siang</option>
+                                            <option value="Sore">Sore</option>
+                                            <option value="Malam">Malam</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="divisi">Divisi</label>
+                                        <label for="divisi">Unit</label>
                                         <input type="text" name="divisi" class="form-control" id="divisi"
                                             placeholder="Divisi">
                                     </div>
@@ -128,7 +132,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button id="btnLanjut" class="btn btn-primary">Lanjut</button>
+                                    <button id="btnLanjut" type="submit" class="btn btn-primary">Lanjut</button>
                                 </div>
 
                             </form>
