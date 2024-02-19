@@ -10,19 +10,27 @@ class Masterperangkat extends Model
     use HasFactory;
     protected $primaryKey = "id";
     protected $table = "masterperangkat";
-    protected $fillable = ['namaperangkat'];
+    protected $fillable = ['namaperangkat', 'role'];
 
-    static function addmasterperangkat($namaperangkat)
+    static function addmasterperangkat($namaperangkat, $role)
     {
         $field = [
             "namaperangkat" => $namaperangkat,
+            "role" => $role,
         ];
         Masterperangkat::create($field);
     }
 
-    static function dataperangkat()
+    static function dataperangkat($roleperangkat = "")
     {
-        $data = Masterperangkat::orderBy('id', 'DESC')->get();
+        if ($roleperangkat !== "") {
+            $data = Masterperangkat::where('role', $roleperangkat)->orderBy('id', 'DESC')->get();
+        }
+        else {
+            $data = Masterperangkat::orderBy('id', 'DESC')->get();
+        }
+        
+
         return $data;
     }
 
@@ -31,4 +39,6 @@ class Masterperangkat extends Model
         $hapusperangkat = Masterperangkat::where('id', $id)->first();
         $hapusperangkat->delete();
     }
+
+
 }

@@ -7,12 +7,26 @@ use App\Models\LaporanMonitoring;
 use App\Models\Masterperangkat;
 use App\Models\Monitoringperangkat;
 use App\Models\MonitoringChecklist;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanMonitoringController extends Controller
 {
     public function index()
     {
-        $namaperangkats = Masterperangkat::all();
+        $role = Auth::user()->role;
+        if ($role == 3 || $role == 2) {
+            $roleperangkat = 2;
+        } else if ($role == 5 || $role == 4) {
+            $roleperangkat = 4;
+        } else if ($role == 7 || $role == 6) {
+            $roleperangkat = 6;
+        } else {
+            $roleperangkat = "";
+        }
+
+
+        $namaperangkats = Masterperangkat::dataperangkat($roleperangkat);
+
         return view('formuser/form-laporan-monitoring')->with('namaperangkats', $namaperangkats);
     }
 
@@ -49,6 +63,7 @@ class LaporanMonitoringController extends Controller
     }
     public function laporanmonitoringdata()
     {
+
         $datalaporanmonitoringnonpublik = LaporanMonitoring::where('divisi', 'IT Non Public')->get();
         $datalaporanmonitoringdatanetwork = LaporanMonitoring::where('divisi', 'Data Network')->get();
         $datalaporanmonitoringaucc = LaporanMonitoring::where('divisi', 'IT AUCC/TOC')->get();
@@ -90,6 +105,20 @@ class LaporanMonitoringController extends Controller
             $data->delete();
         }
         return redirect()->back()->with('success', 'Data berhasil dihapus');
+    }
+
+    public function laporanmonitoring($divisi)
+    {
+        if ($divisi == 'itnonpublic') {
+            $datalaporanmonitoring = LaporanMonitoring::where('divisi', 'IT Non Public')->get();
+        } else if ($divisi == 'datanetwork') {
+            $datalaporanmonitoring = LaporanMonitoring::where('divisi', 'Data Network')->get();
+        } else {
+            $datalaporanmonitoring = LaporanMonitoring::where('divisi', 'IT AUCC/TOC')->get();
+        }
+
+        return view('/laporanmonitoring2')->with('datalaporanmonitoring', $datalaporanmonitoring);
+
     }
 
 

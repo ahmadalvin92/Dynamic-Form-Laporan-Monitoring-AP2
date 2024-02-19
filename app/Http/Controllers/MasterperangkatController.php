@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Masterperangkat;
 use App\Models\Masterchecklist;
+use Illuminate\Support\Facades\Auth;
 
 class MasterperangkatController extends Controller
 {
     public function index()
     {
-        $namaperangkats = Masterperangkat::all();
-        $masterperangkat = Masterperangkat::dataperangkat();
+        $role = Auth::user()->role;
+        $namaperangkats = Masterperangkat::dataperangkat($role);
+        $masterperangkat = Masterperangkat::dataperangkat($role);
         $checklists = Masterchecklist::datachecklist();
         return view('masterperangkat/masterperangkat', compact('namaperangkats', 'checklists', 'masterperangkat'));
     }
@@ -26,8 +28,9 @@ class MasterperangkatController extends Controller
     public function addMasterperangkat(Request $request)
     {
         $namaperangkat = $request->namaperangkat;
+        $role = $request->role;
 
-        Masterperangkat::addmasterperangkat($namaperangkat);
+        Masterperangkat::addmasterperangkat($namaperangkat, $role);
         $pesanperangkat = "Data telah ditambahkan !";
         return redirect('/masterperangkat')->with("pesanperangkat", $pesanperangkat);
     }
@@ -36,11 +39,12 @@ class MasterperangkatController extends Controller
     {
         $namaperangkat = $request->idperangkat;
         $keterangan = $request->keterangan;
-
+        $role = $request->role;
         // Retrieve the idperangkat based on the selected name
         $idperangkat = Masterperangkat::where('namaperangkat', $namaperangkat)->value('id');
 
-        Masterchecklist::addMasterchecklist($idperangkat, $keterangan);
+        Masterchecklist::addMasterchecklist($idperangkat, $keterangan, $role);
+
 
         $pesanchecklist = "Data telah ditambahkan !";
         return redirect('/masterperangkat')->with("pesanchecklist", $pesanchecklist);

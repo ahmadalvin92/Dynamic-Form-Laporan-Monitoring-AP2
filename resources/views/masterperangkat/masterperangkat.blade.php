@@ -37,6 +37,9 @@
 
                                 <div class="card-body">
 
+                                    <input type="text" name="role" class="form-control"
+                                        value="{{ Auth::user()->role }}" readonly>
+
                                     <div class="form-group">
                                         <label for="namaperangkat">Nama Perangkat</label>
                                         <input type="text" name="namaperangkat" class="form-control" id="namaperangkat"
@@ -104,6 +107,9 @@
                                 {{ csrf_field() }}
 
                                 <div class="card-body">
+
+                                    <input type="text" name="role" class="form-control"
+                                        value="{{ Auth::user()->role }}" readonly>
 
                                     <div class="form-group">
                                         <label for="idperangkat">Nama Perangkat</label>

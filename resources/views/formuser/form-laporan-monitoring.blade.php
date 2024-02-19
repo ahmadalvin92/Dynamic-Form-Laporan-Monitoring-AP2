@@ -89,23 +89,29 @@
                                         @if (Auth::user()->role == 1)
                                             <div class="form-group">
                                                 <label for="divisi">Unit</label>
-                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi">
-                                            </div>
-                                        @elseif (Auth::user()->role == 2 || Auth::user()->role == 3)
-                                            <div class="form-group">
-                                                <label for="divisi">Unit</label>
-                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="IT Non Public" readonly>
-                                            </div>
-                                        @elseif (Auth::user()->role == 4 || Auth::user()->role == 5)
-                                            <div class="form-group">
-                                                <label for="divisi">Unit</label>
-                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="Data Network" readonly>
-                                            </div>
-                                        @elseif (Auth::user()->role == 6 || Auth::user()->role == 7)
-                                            <div class="form-group">
-                                                <label for="divisi">Unit</label>
-                                                <input type="text" name="divisi" class="form-control" id="divisi" placeholder="Divisi" value="IT AUCC/TOC" readonly>
-                                            </div>
+                                                <select name="divisi" id="divisi" class="form-control">
+                                                    <option value="1">IT AUCC/TOC</option>
+                                                    <option value="2">IT Non Public</option>
+                                                    <option value="3">Data Network</option>
+                                                </select>
+                                            @elseif (Auth::user()->role == 2 || Auth::user()->role == 3)
+                                                <div class="form-group">
+                                                    <label for="divisi">Unit</label>
+                                                    <input type="text" name="divisi" class="form-control" id="divisi"
+                                                        placeholder="Divisi" value="IT Non Public" readonly>
+                                                </div>
+                                            @elseif (Auth::user()->role == 4 || Auth::user()->role == 5)
+                                                <div class="form-group">
+                                                    <label for="divisi">Unit</label>
+                                                    <input type="text" name="divisi" class="form-control" id="divisi"
+                                                        placeholder="Divisi" value="Data Network" readonly>
+                                                </div>
+                                            @elseif (Auth::user()->role == 6 || Auth::user()->role == 7)
+                                                <div class="form-group">
+                                                    <label for="divisi">Unit</label>
+                                                    <input type="text" name="divisi" class="form-control" id="divisi"
+                                                        placeholder="Divisi" value="IT AUCC/TOC" readonly>
+                                                </div>
                                         @endif
                                     @endauth
 
@@ -117,8 +123,8 @@
 
                                     <div class="form-group">
                                         <label for="user">User</label>
-                                        <input type="text" name="user" class="form-control" id="user" placeholder="User"
-                                            value="{{ auth()->user()->name }}" readonly>
+                                        <input type="text" name="user" class="form-control" id="user"
+                                            placeholder="User" value="{{ auth()->user()->name }}" readonly>
                                     </div>
 
                                 </div>

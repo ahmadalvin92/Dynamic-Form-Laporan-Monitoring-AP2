@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->increments('id');
             $table->integer('idperangkat');
             $table->string('keterangan');
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

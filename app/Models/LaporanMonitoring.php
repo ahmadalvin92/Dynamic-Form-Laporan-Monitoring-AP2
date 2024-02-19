@@ -55,5 +55,11 @@ class LaporanMonitoring extends Model
         return $datadetail;
     }
 
+    static function dataperangkat($role)
+    {
+        $data = Masterperangkat::where('role', $role)->orderBy('id', 'DESC')->get();
+        return $data;
+    }
+
 }
 

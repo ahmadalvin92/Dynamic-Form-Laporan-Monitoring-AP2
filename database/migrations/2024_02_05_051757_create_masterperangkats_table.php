@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('masterperangkat', function (Blueprint $table) {
             $table->increments('id');
             $table->string('namaperangkat')->unique()->nullable();
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

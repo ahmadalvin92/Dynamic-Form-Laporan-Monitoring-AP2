@@ -67,7 +67,11 @@ Route::post('/add-monitoring-perangkat', [MonitoringPerangkatController::class, 
 Route::get('/form-monitoring-checklist/{perangkat}/{idlaporanmonitoring}', [MonitoringChecklistController::class, 'index']);
 Route::post('/add-monitoring-checklist', [MonitoringChecklistController::class, 'addMonitoringChecklist']);
 
-Route::get('/laporanmonitoringdata', [LaporanMonitoringController::class, 'laporanmonitoringdata']);
+// Route::get('/laporanmonitoringdata', [LaporanMonitoringController::class, 'laporanmonitoringdata']);
+
+Route::get('/laporanmonitoring/{divisi}', [LaporanMonitoringController::class, 'laporanmonitoring']);
+
+
 Route::delete('/delete-laporanmonitoring/{id}', [LaporanMonitoringController::class, 'delete']);
 Route::get('/laporanmonitoring-show/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_show']);
 Route::get('/laporanmonitoring-createpdf/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_createpdf']);

@@ -37,13 +37,13 @@
                                     <div class="form-group">
                                         <label for="idperangkat">ID Perangkat</label>
                                         <input type="text" name="idperangkat" class="form-control" id="idperangkat"
-                                            placeholder="ID Perangkat" value={{ $perangkat }}>
+                                            placeholder="ID Perangkat" value={{ $perangkat }} readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="idlaporanmonitoring">ID Laporan Monitoring</label>
                                         <input type="text" name="idlaporanmonitoring" class="form-control"
                                             id="idlaporanmonitoring" placeholder="ID Laporan Monitoring"
-                                            value="{{ $id_laporan_monitoring }}">
+                                            value="{{ $id_laporan_monitoring }}" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="lokasi">Lokasi</label>

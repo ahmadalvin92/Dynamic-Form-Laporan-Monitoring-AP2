@@ -50,9 +50,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     class="brand-image img-fluid elevation-3" style="opacity: .8; max-height: 30px; margin: 0 auto;">
             </a>
 
-
             <!-- Sidebar -->
             <div class="sidebar">
+
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block"> Welcome, {{ Auth::user()->username }}</a>
+                    </div>
+                </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -80,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                            <a href="/laporanmonitoring/itnonpublic" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Data Perangkat</p>
                                             </a>
@@ -92,11 +100,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </a>
                                         </li>
                                         @if (Auth::user()->role == 1 || Auth::user()->role == 2)
-                                        <li class="nav-item">
-                                            <a href="/masterperangkat" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Master Data Perangkat</p>
-                                            </a>
+                                            <li class="nav-item">
+                                                <a href="/masterperangkat" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Master Data Perangkat</p>
+                                                </a>
                                         @endif
                                     </ul>
                                 </li>
@@ -114,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                            <a href="/laporanmonitoring/datanetwork" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Data Perangkat</p>
                                             </a>
@@ -126,11 +134,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </a>
                                         </li>
                                         @if (Auth::user()->role == 1 || Auth::user()->role == 4)
-                                        <li class="nav-item">
-                                            <a href="/masterperangkat" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Master Data Perangkat</p>
-                                            </a>
+                                            <li class="nav-item">
+                                                <a href="/masterperangkat" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Master Data Perangkat</p>
+                                                </a>
                                         @endif
                                     </ul>
                                 </li>
@@ -148,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="/laporanmonitoringdata" class="nav-link">
+                                            <a href="/laporanmonitoring/itaucc" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Data Perangkat</p>
                                             </a>
@@ -160,25 +168,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </a>
                                         </li>
                                         @if (Auth::user()->role == 1 || Auth::user()->role == 6)
-                                        <li class="nav-item">
-                                            <a href="/masterperangkat" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Master Data Perangkat</p>
-                                            </a>
+                                            <li class="nav-item">
+                                                <a href="/masterperangkat" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Master Data Perangkat</p>
+                                                </a>
                                         @endif
                                     </ul>
                                 </li>
                             @endif
                         @endauth
-                        <li class="nav-item">
-                            <a href="/usermanagement" class="nav-link">
-                                <!-- Replace "fas fa-th" with the desired icon class -->
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    User
-                                </p>
-                            </a>
-                        </li>
+                        @auth
+                            @if (Auth::user()->role == 1)
+                                <li class="nav-item">
+                                    <a href="/usermanagement" class="nav-link">
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>
+                                            User
+                                        </p>
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
+
 
                         <li class="nav-item">
                             <a href="/logout" class="nav-link">
