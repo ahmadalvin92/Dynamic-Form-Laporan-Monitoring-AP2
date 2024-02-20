@@ -11,6 +11,7 @@ use App\Http\Controllers\MonitoringPerangkatController;
 use App\Http\Controllers\MonitoringChecklistController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ChartJSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,8 @@ Route::get('/starter', [KaryawanController::class, 'starter']);
 Route::get('/about', [KaryawanController::class, 'about']);
 Route::get('/contact', [KaryawanController::class, 'contact']);
 
-Route::get('/home', [KaryawanController::class, 'index'])->name('home');
+Route::get('/home', [ChartJSController::class, 'index'])->name('home');
+// Route::get('/home', [KaryawanController::class, 'index'])->name('home');
 Route::get('/datakaryawan', [KaryawanController::class, 'datakaryawan']);
 Route::get('/formkaryawan', [KaryawanController::class, 'formkaryawan']);
 Route::get('/formkaryawan', [PerangkatController::class, 'formkaryawan']);
@@ -70,10 +72,12 @@ Route::post('/add-monitoring-checklist', [MonitoringChecklistController::class, 
 // Route::get('/laporanmonitoringdata', [LaporanMonitoringController::class, 'laporanmonitoringdata']);
 
 Route::get('/laporanmonitoring/{divisi}', [LaporanMonitoringController::class, 'laporanmonitoring']);
+// Route::get('/laporanmonitoring2', [LaporanMonitoringController::class, 'laporanmonitoring']);
 
 
 Route::delete('/delete-laporanmonitoring/{id}', [LaporanMonitoringController::class, 'delete']);
 Route::get('/laporanmonitoring-show/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_show']);
 Route::get('/laporanmonitoring-createpdf/{id}', [LaporanMonitoringController::class, 'laporanmonitoring_createpdf']);
+
 
 

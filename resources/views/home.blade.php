@@ -1,73 +1,62 @@
-{{-- panggil template dashboard --}}
 @extends('dashboard')
 
+@section('title', 'Laravel 10 ChartJS Chart Example - ItSolutionStuff.com')
+
 @section('content')
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Laporan Jumlah Perangkat</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Home</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Perangkat Maintenance</h5>
-                            <canvas id="barChart" style="height: 300px;"></canvas>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="myChart" height="100px"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+<script type="text/javascript">
+  
+      var labels =  {!! json_encode($labels) !!};
+var devices =  {!! json_encode($devices) !!};
 
-<!-- Chart.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Jumlah Perangkat',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: devices.map(device => device.count),
+  }]
+};
 
-<!-- Chart data -->
-<script>
-    var ctx1 = document.getElementById('barChart').getContext('2d');
-    var myChart1 = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Sudah Maintenance', 'Belum Maintenance'],
-            datasets: [{
-                label: 'Jumlah Perangkat',
-                data: [70, 30],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+const config = {
+  type: 'bar',
+  data: data,
+  options: {}
+};
+
+const myChart = new Chart(
+  document.getElementById('myChart'),
+  config
+);
+
+  
 </script>
-
 @endsection

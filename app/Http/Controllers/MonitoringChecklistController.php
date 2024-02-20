@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\MonitoringChecklist;
 use App\Models\Masterchecklist;
 use App\Models\MonitoringPerangkat;
+use Illuminate\Support\Facades\Auth;
 
 class MonitoringChecklistController extends Controller
 {
     public function index($perangkat, $idlaporanmonitoring)
     {
         $id_monitoring_perangkat = Monitoringperangkat::latest('id')->first()->id;
-        $checklists = Masterchecklist::checklistperangkat($perangkat);
+        $role = Auth::user()->role;
+        $checklists = Masterchecklist::checklistperangkat($perangkat, $role);
         return view('formuser/monitoring-checklist')->with('checklists', $checklists)
             ->with('idlaporanmonitoring', $idlaporanmonitoring)->with('id_monitoring_perangkat', $id_monitoring_perangkat);
         // return view('formuser/monitoring-checklist');
@@ -36,9 +38,20 @@ class MonitoringChecklistController extends Controller
             $monitoringChecklist->save();
         }
 
-        // Optionally, you can return a response or redirect the user to another page
-        // return redirect()->back()->with('success', 'Monitoring checklists added successfully.');
-        return redirect('/laporanmonitoringdata');
+        $role = Auth::user()->role;
+        if ($role == 3 || $role == 2) {
+            return redirect('/laporanmonitoring/itnonpublic');
+
+        } else if ($role == 5 || $role == 4) {
+            return redirect('/laporanmonitoring/datanetwork');
+
+        } else if ($role == 7 || $role == 6) {
+            return redirect('/laporanmonitoring/itaucc');
+        }
+        else {
+            return redirect('/laporanmonitoring/{divisi}');
+        }
+        
     }
 
 }
