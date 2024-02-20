@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\User;
+use App\Models\MonitoringPerangkat;
 use DB;
 
 class ChartJSController extends Controller
@@ -17,14 +17,20 @@ class ChartJSController extends Controller
     public function index(): View
     {
         $devices = DB::table('monitoring_perangkat')
-            ->select('idperangkat', DB::raw('COUNT(*) as count'))
-            ->groupBy('idperangkat')
+            ->select('idlaporanmonitoring', DB::raw('COUNT(*) as count'))
+            ->groupBy('idlaporanmonitoring')
             ->get();
 
-        $labels = $devices->pluck('idperangkat'); // misalnya, ambil idperangkat sebagai label
+        // Mengelompokkan berdasarkan idlaporanmonitoring
+        $groupedDevices = $devices->groupBy('idlaporanmonitoring')->map(function ($group) {
+            return $group->sum('count');
+        });
 
-        return view('home', compact('labels', 'devices'));
+        $labels = $groupedDevices->keys(); // Ambil idlaporanmonitoring sebagai label
+
+        return view('home', compact('labels', 'groupedDevices'));
     }
+
 
 
 }

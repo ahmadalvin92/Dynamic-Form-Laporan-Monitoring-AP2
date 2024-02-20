@@ -32,17 +32,19 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
 <script type="text/javascript">
-  
-      var labels =  {!! json_encode($labels) !!};
-var devices =  {!! json_encode($devices) !!};
+
+var labels =  {!! json_encode($labels) !!};
+var devices =  {!! json_encode($groupedDevices) !!}; // Menggunakan $groupedDevices yang sudah dikelompokkan
+
+const uniqueDevices = Object.keys(devices).length; // Menghitung jumlah idlaporanmonitoring yang unik
 
 const data = {
-  labels: labels,
+  labels: ['Total Perangkat'], // Menggunakan label tunggal untuk total perangkat
   datasets: [{
     label: 'Jumlah Perangkat',
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: 'rgb(255, 99, 132)',
-    data: devices.map(device => device.count),
+    data: [uniqueDevices], // Menggunakan jumlah idlaporanmonitoring yang unik sebagai data
   }]
 };
 
@@ -57,6 +59,6 @@ const myChart = new Chart(
   config
 );
 
-  
 </script>
+
 @endsection
