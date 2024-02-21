@@ -63,13 +63,11 @@ class LaporanMonitoringController extends Controller
     }
     public function laporanmonitoringdata()
     {
+        $datalaporanmonitoring = LaporanMonitoring::all();
 
-        $datalaporanmonitoringnonpublik = LaporanMonitoring::where('divisi', 'IT Non Public')->get();
-        $datalaporanmonitoringdatanetwork = LaporanMonitoring::where('divisi', 'Data Network')->get();
-        $datalaporanmonitoringaucc = LaporanMonitoring::where('divisi', 'IT AUCC/TOC')->get();
-        
-        return view('/laporanmonitoring')->with('datalaporanmonitoringnonpublik', $datalaporanmonitoringnonpublik)->with('datalaporanmonitoringdatanetwork', $datalaporanmonitoringdatanetwork)->with('datalaporanmonitoringaucc', $datalaporanmonitoringaucc);
+        return view('laporanmonitoring')->with('datalaporanmonitoring', $datalaporanmonitoring);
     }
+
 
     public function laporanmonitoring_show($id)
     {
@@ -117,6 +115,7 @@ class LaporanMonitoringController extends Controller
         } else {
             $datalaporanmonitoring = LaporanMonitoring::where('divisi', 'IT AUCC/TOC')->get();
         }
+        
 
         return view('/laporanmonitoring2')->with('datalaporanmonitoring', $datalaporanmonitoring);
 

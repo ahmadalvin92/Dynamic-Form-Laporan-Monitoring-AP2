@@ -49,7 +49,7 @@ class MonitoringChecklistController extends Controller
             return redirect('/laporanmonitoring/itaucc');
         }
         else {
-            return redirect('/laporanmonitoring/{divisi}');
+            return redirect('/laporanmonitoringdata');
         }
         
     }
