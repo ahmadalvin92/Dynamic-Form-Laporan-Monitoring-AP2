@@ -17,13 +17,14 @@ class MonitoringChecklistController extends Controller
         $role = Auth::user()->role;
 
         $roleperangkat = "";
-        if ($role == 3 || $role == 2) {
+        if ($role == 1 || $role == 3 || $role == 2) {
             $roleperangkat = 2;
-        } else if ($role == 5 || $role == 4) {
+        } else if ($role == 1 || $role == 5 || $role == 4) {
             $roleperangkat = 4;
-        } else if ($role == 7 || $role == 6) {
+        } else if ($role == 1 || $role == 7 || $role == 6) {
             $roleperangkat = 6;
         }
+
 
         $checklists = Masterchecklist::checklistperangkat($perangkat, $roleperangkat);
 
