@@ -15,11 +15,23 @@ class MonitoringChecklistController extends Controller
     {
         $id_monitoring_perangkat = Monitoringperangkat::latest('id')->first()->id;
         $role = Auth::user()->role;
-        $checklists = Masterchecklist::checklistperangkat($perangkat, $role);
+
+        $roleperangkat = "";
+        if ($role == 3 || $role == 2) {
+            $roleperangkat = 2;
+        } else if ($role == 5 || $role == 4) {
+            $roleperangkat = 4;
+        } else if ($role == 7 || $role == 6) {
+            $roleperangkat = 6;
+        }
+
+        $checklists = Masterchecklist::checklistperangkat($perangkat, $roleperangkat);
+
         return view('formuser/monitoring-checklist')->with('checklists', $checklists)
             ->with('idlaporanmonitoring', $idlaporanmonitoring)->with('id_monitoring_perangkat', $id_monitoring_perangkat);
         // return view('formuser/monitoring-checklist');
     }
+
 
     public function addMonitoringChecklist(Request $request)
     {
@@ -47,11 +59,10 @@ class MonitoringChecklistController extends Controller
 
         } else if ($role == 7 || $role == 6) {
             return redirect('/laporanmonitoring/itaucc');
-        }
-        else {
+        } else {
             return redirect('/laporanmonitoringdata');
         }
-        
+
     }
 
 }

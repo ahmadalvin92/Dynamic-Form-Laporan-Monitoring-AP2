@@ -45,9 +45,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link d-flex align-items-center">
+            <a href="/home" class="brand-link d-flex align-items-center">
                 <img src="/dist/img/Angkasa_Pura_II_logo_2014.svg.png" alt="Angkasa Pura II"
-                    class="brand-image img-fluid elevation-3" style="opacity: .8; max-height: 30px; margin: 0 auto;">
+                    class="brand-image img-fluid" style="opacity: .8; max-height: 70px; margin: 0 auto;">
             </a>
 
             <!-- Sidebar -->
@@ -55,7 +55,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ url('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ url('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"> Welcome, {{ Auth::user()->username }}</a>
