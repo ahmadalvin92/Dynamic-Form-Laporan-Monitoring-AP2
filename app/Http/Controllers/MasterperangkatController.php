@@ -62,8 +62,8 @@ class MasterperangkatController extends Controller
     {
         Masterchecklist::hapuschecklist($id);
 
-        $pesanperangkat = "Perangkat telah dihapus !";
-        return redirect('/masterperangkat')->with("pesanperangkat", $pesanperangkat);
+        $pesanchecklist = "Item checklist telah dihapus !";
+        return redirect('/masterperangkat')->with("pesanchecklist", $pesanchecklist);
     }
 
 }

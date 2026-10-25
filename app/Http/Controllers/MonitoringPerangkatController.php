@@ -11,8 +11,9 @@ class MonitoringPerangkatController extends Controller
 {
     public function index($perangkat)
     {
-        // Ambil ID laporan monitoring terbaru dari database
-        $id_laporan_monitoring = LaporanMonitoring::latest('id')->first()->id;
+        // Ambil ID laporan monitoring terbaru dari database secara aman
+        $latest = LaporanMonitoring::latest('id')->first();
+        $id_laporan_monitoring = $latest ? $latest->id : 1;
 
         return view('formuser/monitoring-perangkat')->with([
             'perangkat' => $perangkat,
@@ -23,19 +24,19 @@ class MonitoringPerangkatController extends Controller
 
     public function addMonitoringPerangkat(Request $request)
     {
-        // Validasi input jika diperlukan
+        // Validasi input
         $request->validate([
             'idperangkat' => 'required',
             'idlaporanmonitoring' => 'required',
             'lokasi' => 'required',
-            'catatan' => 'required',
-            'foto.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk setiap file gambar
+            'catatan' => 'nullable',
+            'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
 
         $idperangkat = $request->idperangkat;
         $idlaporanmonitoring = $request->idlaporanmonitoring;
         $lokasi = $request->lokasi;
-        $catatan = $request->catatan;
+        $catatan = $request->catatan ?? '-';
 
         if ($request->hasFile('foto')) {
             $fotos = $request->file('foto');
@@ -44,10 +45,12 @@ class MonitoringPerangkatController extends Controller
                 $foto->move("file/", $fotoname);
                 MonitoringPerangkat::addmonitoringperangkat($idperangkat, $idlaporanmonitoring, $lokasi, $catatan, $fotoname);
             }
+        } else {
+            MonitoringPerangkat::addmonitoringperangkat($idperangkat, $idlaporanmonitoring, $lokasi, $catatan, null);
         }
 
-        $pesanmonitoringperangkat = "Data telah ditambahkan !";
-        return redirect('/form-monitoring-checklist/' . $idperangkat . '/' . $idlaporanmonitoring)->with("pesamonitoringperangkat", $pesanmonitoringperangkat);
+        $pesanmonitoringperangkat = "Data perangkat dan dokumentasi berhasil disimpan!";
+        return redirect('/form-monitoring-checklist/' . $idperangkat . '/' . $idlaporanmonitoring)->with("pesanmonitoringperangkat", $pesanmonitoringperangkat);
     }
 
 }

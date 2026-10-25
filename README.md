@@ -21,11 +21,26 @@ Sistem ini memiliki keunggulan berupa **Dynamic Form & Checklist Builder**, di m
 
 ## 📸 Dokumentasi Antarmuka (Screenshots)
 
-### 📊 Alur Kerja Sistem Monitoring AP2
-| 1. Master Data & Dynamic Checklist Builder | 2. Form Monitoring & Inspeksi Lapangan | 3. Tabel Data Monitoring & Dokumentasi Foto |
-| :---: | :---: | :---: |
-| ![Master Data Perangkat](screenshots/01-master-data-perangkat.png) | ![Form Monitoring Checklist](screenshots/02-form-monitoring-checklist.png) | ![Data Monitoring Perangkat](screenshots/03-data-monitoring-perangkat.png) |
-| *Konfigurasi perangkat & dynamic checklist item* | *Input kondisi OK/Not OK, catatan & upload foto* | *Rekap monitoring harian dengan preview foto & aksi* |
+### 📊 Tampilan Sistem Monitoring Enterprise AP2
+| 1. Dashboard Eksekutif & Analitik KPI | 2. Master Perangkat & Dynamic Checklist |
+| :---: | :---: |
+| ![Dashboard Analytics](screenshots/01-dashboard-analytics.png) | ![Master Data Perangkat](screenshots/02-master-data-perangkat.png) |
+| *Ringkasan statistik metrik, compliance donut chart, & monitoring terkini* | *Konfigurasi perangkat bandara & dynamic checklist item builder* |
+
+| 3. Form Laporan Monitoring & Dual Signature | 4. Form Checklist Kondisi Perangkat |
+| :---: | :---: |
+| ![Form Laporan Monitoring](screenshots/03-form-laporan-monitoring.png) | ![Form Monitoring Checklist](screenshots/04-form-monitoring-checklist.png) |
+| *Input divisi bandara, teknisi, supervisor, dan digital signature pad* | *Inspeksi indikator teknis OK / NOT OK, catatan temuan, & upload foto* |
+
+| 5. Rekapitulasi Data Monitoring Divisi | 6. Manajemen Role & Pengguna |
+| :---: | :---: |
+| ![Data Laporan Divisi](screenshots/05-data-laporan-divisi.png) | ![User Management](screenshots/06-user-management.png) |
+| *Daftar inspeksi berkala per unit bandara dengan status verifikasi & export PDF* | *Administrasi pengguna internal, kontrol akses role admin & teknisi* |
+
+<p align="center">
+  <b>7. Antarmuka Login Enterprise Angkasa Pura II</b><br/>
+  <img src="screenshots/07-login-ap2.png" alt="Login Page AP2" width="85%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+</p>
 
 ---
 
@@ -138,10 +153,14 @@ php artisan key:generate
 php artisan storage:link
 ```
 
-### 6. Migrasi Database
-Pastikan database `monitoring_ap2` telah dibuat di MySQL, lalu jalankan:
+### 6. Migrasi Database & Seeding Data Realistis Bandara
+Pastikan database `monitoring_ap2` telah dibuat di MySQL, lalu jalankan migrasi dan seeder data perangkat bandara (Cisco Catalyst, Dell PowerEdge AODB, Hikvision PTZ Apron CCTV, Aruba AP, dll):
 ```bash
+# Jalankan migrasi tabel
 php artisan migrate
+
+# Jalankan seeder perangkat & checklist operasional Angkasa Pura II
+php artisan db:seed --class=AirportMasterDataSeeder
 ```
 
 ### 7. Jalankan Server Aplikasi
@@ -149,6 +168,8 @@ php artisan migrate
 php artisan serve
 ```
 Akses aplikasi melalui peramban di: **`http://127.0.0.1:8000`**
+- **Default Admin Account:** `alvin@angkasapura2.co.id` / `password123` (Role: 1 - Administrator)
+- **Default Technician Account:** `teknisi@angkasapura2.co.id` / `password123` (Role: 2 - Teknisi Lapangan)
 
 ---
 

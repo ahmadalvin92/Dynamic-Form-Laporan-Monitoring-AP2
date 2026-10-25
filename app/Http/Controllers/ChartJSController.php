@@ -16,19 +16,30 @@ class ChartJSController extends Controller
      */
     public function index(): View
     {
-        $devices = DB::table('monitoring_perangkat')
-            ->select('idlaporanmonitoring', DB::raw('COUNT(*) as count'))
-            ->groupBy('idlaporanmonitoring')
-            ->get();
+        $totalReports = DB::table('laporan_monitoring')->count();
+        $totalDevices = DB::table('masterperangkat')->count();
+        $totalChecklists = DB::table('masterchecklists')->count();
 
-        // Mengelompokkan berdasarkan idlaporanmonitoring
-        $groupedDevices = $devices->groupBy('idlaporanmonitoring')->map(function ($group) {
-            return $group->sum('count');
-        });
+        $countNonPublic = DB::table('laporan_monitoring')->where('divisi', 'IT Non Public')->count();
+        $countDataNetwork = DB::table('laporan_monitoring')->where('divisi', 'Data Network')->count();
+        $countAucc = DB::table('laporan_monitoring')->where('divisi', 'IT AUCC/TOC')->count();
 
-        $labels = $groupedDevices->keys(); // Ambil idlaporanmonitoring sebagai label
+        $recentReports = DB::table('laporan_monitoring')->orderByDesc('id')->take(5)->get();
 
-        return view('home', compact('labels', 'groupedDevices'));
+        $labels = ['IT Non Public', 'Data Network', 'IT AUCC/TOC'];
+        $divisionCounts = [$countNonPublic, $countDataNetwork, $countAucc];
+
+        return view('home', compact(
+            'totalReports',
+            'totalDevices',
+            'totalChecklists',
+            'countNonPublic',
+            'countDataNetwork',
+            'countAucc',
+            'labels',
+            'divisionCounts',
+            'recentReports'
+        ));
     }
 
 

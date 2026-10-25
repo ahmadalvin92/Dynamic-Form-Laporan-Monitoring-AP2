@@ -44,55 +44,56 @@ class AuthController extends Controller
             }
         }
 
-        $ldapResponse = Http::asForm()->post('https://developer.angkasapura2.co.id/mobile/ldap/is_valid/', [
-            'username' => $validated['username'],
-            'password' => $validated['password'],
-        ]);
+        try {
+            $ldapResponse = Http::timeout(3)->asForm()->post('https://developer.angkasapura2.co.id/mobile/ldap/is_valid/', [
+                'username' => $validated['username'],
+                'password' => $validated['password'],
+            ]);
 
-        $ldapData = $ldapResponse->json();
+            $ldapData = $ldapResponse->json();
 
-        if ($ldapResponse->successful() && $ldapData['status'] === 'ok') {
-            $user = User::where('username', $validated['username'])->first();
+            if ($ldapResponse->successful() && isset($ldapData['status']) && $ldapData['status'] === 'ok') {
+                $user = User::where('username', $validated['username'])->first();
 
-            if (!$user) {
-                $userData = [
-                    'username' => $ldapData['username'],
-                    'name' => $ldapData['name'],
-                    'password' => Hash::make($validated['password']),
-                    'email' => $ldapData['personal_email'],
-                    'nip' => $ldapData['nip'],
-                    'unit' => $ldapData['unit_name'],
-                    'role' => '1',
-                    'is_ldap' => true,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
+                if (!$user) {
+                    $userData = [
+                        'username' => $ldapData['username'] ?? $validated['username'],
+                        'name' => $ldapData['name'] ?? $validated['username'],
+                        'password' => Hash::make($validated['password']),
+                        'email' => $ldapData['personal_email'] ?? $validated['username'] . '@angkasapura2.co.id',
+                        'nip' => $ldapData['nip'] ?? '-',
+                        'unit' => $ldapData['unit_name'] ?? 'Staff',
+                        'role' => '3',
+                        'is_ldap' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
 
-                User::create($userData);
+                    $user = User::create($userData);
+                }
+
+                auth()->loginUsingId($user->id);
+                request()->session()->regenerate();
+
+                return redirect()->route('home')->with('success', 'Logged in successfully via LDAP!');
             }
-
-            $user = User::where('username', $validated['username'])->first();
-
-            auth()->loginUsingId($user->id);
-
-            request()->session()->regenerate();
-
-            return redirect()->route('home')->with('success', 'Logged in successfully!');
+        } catch (\Exception $e) {
+            // LDAP service unavailable, fallback to local error
         }
 
         return redirect()->route('login')->withErrors([
-            'username' => 'No matching user found with the provided username and password'
+            'username' => 'Username atau password yang dimasukkan tidak sesuai.'
         ]);
     }
 
-        public function logout()
+    public function logout()
     {
         auth()->logout();
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success, Logged out successfulyy!');
+        return redirect()->route('login')->with('success', 'Logged out successfully!');
     }
 
     public function usermanagement() {

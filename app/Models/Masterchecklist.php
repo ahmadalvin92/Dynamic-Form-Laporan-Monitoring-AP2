@@ -22,10 +22,15 @@ class Masterchecklist extends Model
         Masterchecklist::create($field);
     }
 
-    static function checklistperangkat($perangkat, $role)
+    static function checklistperangkat($perangkat, $role = "")
     {
-        $checklist = Masterchecklist::where('idperangkat', $perangkat)->where('role', $role)->get();
-        return $checklist;
+        if (!empty($role)) {
+            $checklist = Masterchecklist::where('idperangkat', $perangkat)->where('role', $role)->get();
+            if ($checklist->count() > 0) {
+                return $checklist;
+            }
+        }
+        return Masterchecklist::where('idperangkat', $perangkat)->get();
     }
 
     static function datachecklist()
